@@ -13,10 +13,10 @@ const app = express()
 app.use(compression())
 
 // Handling and rendering of static files
-app.use(express.static(path.join(__dirname, '/client/build')))
+app.use(express.static(path.join(__dirname, './client/build')))
 
 app.get('/', (_, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+  res.sendFile(path.join(__dirname + './client/build/index.html'))
 })
 
 /*
