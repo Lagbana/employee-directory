@@ -1,0 +1,30 @@
+{
+  "name": "employee-directory",
+  "version": "1.0.0",
+  "description": "A react webpage that displays a table employee directory with the ability to sort table and search by employee attribute.",
+  "main": "server.js",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd client && npm run build && cd ..",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lagbana/employee-directory.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Larry Agbana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lagbana/employee-directory/issues"
+  },
+  "homepage": "https://github.com/Lagbana/employee-directory#readme"
+}
