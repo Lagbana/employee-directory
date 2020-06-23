@@ -2,35 +2,56 @@ import React, { Component } from 'react'
 import API from '../utils/API'
 import Container from '../components/Container'
 import Table from '../components/Table'
-// import FilterTable from '../components/FilterTable'
+import SearchBar from '../components/SearchBar'
 
 class Directory extends Component {
   state = {
-    employees: []
+    employees: [],
+    employeeData: [],
+    isAscending: false,
+    search: ''
   }
 
   // When the component mounts, get a list of all available base breeds and update this.state.breeds
   componentDidMount () {
     this.setState({ employees: API.getRandomEmployees() })
+    this.getSearchData()
   }
 
+  componentDidUpdate () {}
   handleTableSort = event => {
-    //   this.setState({ search: event.target.value })
     let employeeArray = this.state.employees
-    function compare (a, b) {
+    const compare = (a, b) => {
       // Use toUpperCase() to ignore character casing
       let propA = a[event.target.getAttribute('name')]
       let propB = b[event.target.getAttribute('name')]
-        if (isNaN(propA) && isNaN(propB)) {
-            propA = propA.toUpperCase()
-            propB = propB.toUpperCase()
+
+      if (propA && propB && isNaN(propA) && isNaN(propB)) {
+        propA = propA.toUpperCase()
+        propB = propB.toUpperCase()
       }
 
       let comparison = 0
-      if (propA > propB) {
-        comparison = 1
-      } else if (propA < propB) {
-        comparison = -1
+      switch (this.state.isAscending) {
+        case true:
+          this.setState({ isAscending: false })
+          if (propA > propB) {
+            comparison = -1
+          } else if (propA < propB) {
+            comparison = 1
+          }
+          break
+        case false:
+          this.setState({ isAscending: true })
+          if (propA > propB) {
+            comparison = 1
+          } else if (propA < propB) {
+            comparison = -1
+          }
+          break
+        default:
+          comparison = 0
+          break
       }
       return comparison
     }
@@ -39,26 +60,52 @@ class Directory extends Component {
     this.setState({ employees: employeeArray })
   }
 
-  //   handleFormSubmit = event => {
-  //     event.preventDefault()
-  //     API.getDogsOfBreed(this.state.search)
-  //       .then(res => {
-  //         if (res.data.status === 'error') {
-  //           throw new Error(res.data.message)
-  //         }
-  //         this.setState({ results: res.data.message, error: '' })
-  //       })
-  //       .catch(err => this.setState({ error: err.message }))
-  //   }
+  handleSearch = event => {
+    this.setState({ search: event.target.value })
+    if (!this.state.search) {
+      return
+    }
+    let searchVal = this.state.search
+    // remove below line
+    let employeeArray = API.getRandomEmployees()
+
+    let searchArray = employeeArray.filter(item => {
+      let itemArray = Object.values(item)
+      return itemArray.some(element => {
+        return element
+          .toString()
+          .toLowerCase()
+          .includes(searchVal.toLowerCase())
+      })
+    })
+
+    if (searchVal && searchArray.length > 0) {
+      this.setState({ employees: searchArray })
+    } else if (searchVal === '') {
+      this.setState({ employees: API.getRandomEmployees() })
+    }
+  }
+
+  getSearchData = () => {
+    const empData = API.getRandomEmployees()
+    // eslint-disable-next-line
+    const employeeData = empData.reduce((acc, cur) => Object.values(acc).concat(Object.values(cur)), [])
+    this.setState({ employeeData: employeeData })
+  }
   render () {
     return (
       <div>
-        <Container className={'mx-auto'} style={{ width: '80%' }}>
+        <Container className={'mx-auto'} style={{ width: '85%' }}>
           <h4 className='text-center py-3'>Employee Directory</h4>
-
+          <SearchBar
+            style={{ width: '45%' }}
+            search={this.state.search}
+            myhandlesearch={this.handleSearch}
+            employeeData={this.state.employeeData.map((item, key) => (
+              <option key={key} value={item} />
+            ))}
+          />
           <Table
-            // handleFormSubmit={this.handleFormSubmit}
-            // handleInputChange={this.handleInputChange}
             handleTableSort={this.handleTableSort}
             employees={this.state.employees}
           />
