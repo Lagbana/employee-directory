@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
   Import 
     *fontawesome icon library components
     return Navbar JSX 
-
 */
 function Navbar () {
   return (
