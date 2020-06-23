@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// Import dependencies and components
+import React from 'react'
+import './components/FontAwesomeIcons'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Directory from './pages/Directory'
+import Footer from './components/Footer'
 
-function App() {
+/*
+ Return
+    *Navbar JSX component
+    *Directory page component
+      - made of Container, SearchBar, and Table components
+      - handles state management and lifecycle events
+    *Footer JSX component
+*/
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div>
+        <Navbar />
+        <Directory />
+        <Footer />
+      </div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
