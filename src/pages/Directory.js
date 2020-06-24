@@ -36,20 +36,22 @@ class Directory extends Component {
   /*
     - Method to sort the employee directory table
       - sort utilizes a compare function that defines how the table should be sorted (ascending or descending)
+      - context parameter is the name of the table header that is to be sorted. It is used as an object key in the array of employee objects
   */
-  handleTableSort = event => {
+  handleTableSort = context => {
+  
     let employeeArray = this.state.employees
 
+    // compare function compares one value to the next value in the array
+    // and assigns comparison value of + 1 or - 1 based on their alphabetical order or numeric size
+    // a and b parameters are the two objects being compared with each array iteration
     const compare = (a, b) => {
-      // If the table header sort icon is clicked re-assign the target value to the parent node (table header)
-      let target = event.target
-      if (target.localName === 'path') {
-        target = target.parentNode.parentNode
-      }
-      // Use toUpperCase() to ignore character casing
-      let propA = a[target.getAttribute('name')]
-      let propB = b[target.getAttribute('name')]
 
+      // Get the required table column (and Array) using context as object key
+      let propA = a[context]
+      let propB = b[context]
+
+      // If table column data is alphabetical, convert data to uppercase to ignore character casing
       if (propA && propB && isNaN(propA) && isNaN(propB)) {
         propA = propA.toUpperCase()
         propB = propB.toUpperCase()

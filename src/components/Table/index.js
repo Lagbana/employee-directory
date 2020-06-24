@@ -2,6 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Table (props) {
+  const { handleTableSort } = props
   const employeeRows = props.employees.map((item, index) => (
     <tr key={index}>
       <td>
@@ -20,37 +21,47 @@ function Table (props) {
       <thead className='thead-light'>
         <tr>
           <th scope='col'>Avatar</th>
-          <th scope='col' onClick={props.handleTableSort} name={'firstname'}>
-            Firstname{' '}
-            <FontAwesomeIcon icon='long-arrow-alt-up' name={'firstname'} />{' '}
-            <FontAwesomeIcon icon='long-arrow-alt-down' name={'firstname'} />
-          </th>
-          <th scope='col' onClick={props.handleTableSort} name={'lastname'}>
-            Lastname{' '}
-            <FontAwesomeIcon icon='long-arrow-alt-up' name={'lastname'} />{' '}
-            <FontAwesomeIcon icon='long-arrow-alt-down' name={'lastname'} />
-          </th>
-          <th scope='col' onClick={props.handleTableSort} name={'jobTitle'}>
-            Job Title{' '}
-            <FontAwesomeIcon icon='long-arrow-alt-up' name={'jobTitle'} />{' '}
-            <FontAwesomeIcon icon='long-arrow-alt-down' name={'jobTitle'} />
-          </th>
-          <th scope='col' onClick={props.handleTableSort} name={'department'}>
-            Department{' '}
-            <FontAwesomeIcon icon='long-arrow-alt-up' name={'department'} />{' '}
-            <FontAwesomeIcon icon='long-arrow-alt-down' name={'jobTitle'} />
+          {/* onClick={() => orderHandler('first') */}
+
+          <th
+            scope='col'
+            onClick={() => handleTableSort('firstname')}
+            name={'firstname'}
+          >
+            Firstname <FontAwesomeIcon icon='long-arrow-alt-up' />{' '}
+            <FontAwesomeIcon icon='long-arrow-alt-down' />
           </th>
           <th
             scope='col'
-            onClick={props.handleTableSort}
+            onClick={() => handleTableSort('lastname')}
+            name={'lastname'}
+          >
+            Lastname <FontAwesomeIcon icon='long-arrow-alt-up' />{' '}
+            <FontAwesomeIcon icon='long-arrow-alt-down' />
+          </th>
+          <th
+            scope='col'
+            onClick={() => handleTableSort('jobTitle')}
+            name={'jobTitle'}
+          >
+            Job Title <FontAwesomeIcon icon='long-arrow-alt-up' />{' '}
+            <FontAwesomeIcon icon='long-arrow-alt-down' />
+          </th>
+          <th
+            scope='col'
+            onClick={() => handleTableSort('department')}
+            name={'department'}
+          >
+            Department <FontAwesomeIcon icon='long-arrow-alt-up' />{' '}
+            <FontAwesomeIcon icon='long-arrow-alt-down' />
+          </th>
+          <th
+            scope='col'
+            onClick={() => handleTableSort('employeeNumber')}
             name={'employeeNumber'}
           >
-            Employee Number{' '}
-            <FontAwesomeIcon icon='long-arrow-alt-up' name={'employeeNumber'} />{' '}
-            <FontAwesomeIcon
-              icon='long-arrow-alt-down'
-              name={'employeeNumber'}
-            />
+            Employee Number <FontAwesomeIcon icon='long-arrow-alt-up' />{' '}
+            <FontAwesomeIcon icon='long-arrow-alt-down' />
           </th>
           <th scope='col'>Email </th>
         </tr>
