@@ -57,8 +57,9 @@ class Directory extends Component {
 
       /*
         * Based on the isAscending boolean state property
-          - set the isAscending value
-          - compare every value in the array and set a comparison value used to sort the table
+          - set the isAscending value for the next order direction
+          - compare every value in the array and set a comparison value used to sort the table, 
+          - switch the comparison value when ordering in the opposite direction
           - setState and render the table to reflect the new order of employee list
       */
       let comparison = 0
