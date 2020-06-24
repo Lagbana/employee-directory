@@ -1,28 +1,33 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-function Table (props) {
+function Table(props) {
+  // Destructure props object
   const { handleTableSort } = props
-  const employeeRows = props.employees.map((item, index) => (
-    <tr key={index}>
-      <td>
-        <img src={item.avatar} alt={`${item.firstname} ${item.lastname}`} />
-      </td>
-      <td>{item.firstname}</td>
-      <td>{item.lastname}</td>
-      <td>{item.jobTitle}</td>
-      <td>{item.department}</td>
-      <td>{item.employeeNumber}</td>
-      <td>{item.email}</td>
-    </tr>
-  ))
+
+  // Create table rows and pre-populate the rows the employee data
+  const employeeRows = props.employees.map((item, index) => {
+    const {avatar, firstname, lastname, jobTitle, department, employeeNumber, email} = item
+    
+    return (
+      <tr key={index}>
+        <td>
+          <img src={avatar} alt={`${firstname} ${lastname}`} />
+        </td>
+        <td>{firstname}</td>
+        <td>{lastname}</td>
+        <td>{jobTitle}</td>
+        <td>{department}</td>
+        <td>{employeeNumber}</td>
+        <td>{email}</td>
+      </tr>
+    )
+  })
   return (
     <table className='table table-hover table-responsive'>
       <thead className='thead-light'>
         <tr>
           <th scope='col'>Avatar</th>
-          {/* onClick={() => orderHandler('first') */}
-
           <th
             scope='col'
             onClick={() => handleTableSort('firstname')}
