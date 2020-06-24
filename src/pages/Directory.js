@@ -94,7 +94,7 @@ class Directory extends Component {
   }
 
   /*
-    * - Function to handle state management associated with employee search
+    * - Method to handle state management associated with employee search
   */
   handleSearch = event => {
     event.persist()
@@ -161,8 +161,6 @@ class Directory extends Component {
           <Table
             handleTableSort={this.handleTableSort}
             employees={this.state.employees}
-            upColor={this.state.upColor}
-            downColor={this.state.downColor}
           />
         </Container>
       </div>
